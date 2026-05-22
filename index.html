@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berryfull × GROWER COMPANY — Propuesta Estratégica</title>
+    <style>
+        :root {
+            --berry-dark: #4C0519;
+            --berry-pink: #DB2777;
+            --berry-soft: #FCE7F3;
+            --glass-sheet: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 182, 193, 0.6);
+            --glass-glow: rgba(255, 255, 255, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: #FFF5F7;
+            color: var(--berry-dark);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- FONDO MEDITERRÁNEO / COQUETTE PRISMA --- */
+        .prism-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FCE7F3 50%, #F3E8FF 100%);
+        }
+
+        .prism-light {
+            position: absolute;
+            width: 170vw; height: 170vh;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(251, 207, 232, 0.4) 25%, 
+                rgba(232, 121, 249, 0.15) 50%, 
+                rgba(192, 132, 252, 0.15) 75%,
+                rgba(255, 255, 255, 0) 100%);
+            filter: blur(80px);
+            animation: prismRotate 30s infinite linear;
+        }
+
+        @keyframes prismRotate {
+            from { transform: translate(-35%, -35%) rotate(0deg); }
+            to { transform: translate(-35%, -35%) rotate(360deg); }
+        }
+
+        /* --- CONTENEDOR CENTRAL --- */
+        .main-container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 0 60px 0;
+            text-align: center;
+        }
+
+        /* --- SISTEMA POP-UP REVEAL --- */
+        .popup-card {
+            opacity: 0;
+            transform: scale(0.92) translateY(30px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .popup-card.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* --- RECUADROS LIQUID GLASS GENTLE --- */
+        .glass-box {
+            background: var(--glass-sheet);
+            backdrop-filter: blur(50px) saturate(200%);
+            -webkit-backdrop-filter: blur(50px) saturate(200%);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 36px;
+            padding: clamp(30px, 5vw, 55px);
+            margin-bottom: 35px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 30px 60px rgba(157, 23, 77, 0.03), 
+                inset 0 4px 12px var(--glass-glow);
+        }
+
+        .glass-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 192, 203, 0.05) 100%);
+            pointer-events: none;
+            border-radius: 36px;
+        }
+
+        /* --- ENCABEZADOS Y LETRA --- */
+        .brand-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--berry-pink);
+            margin-bottom: 15px;
+        }
+
+        .hero-title {
+            font-size: clamp(3.2rem, 9vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            color: var(--berry-dark);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 45px;
+            text-transform: uppercase;
+            color: var(--berry-dark);
+        }
+
+        /* --- FORMATOS DE PITCH --- */
+        .tag {
+            background: var(--berry-dark);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--berry-dark);
+        }
+
+        .card-desc {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            opacity: 0.8;
+            line-height: 1.5;
+            max-width: 600px;
+            color: #4C0519;
+        }
+
+        .hook-box {
+            background: rgba(255, 255, 255, 0.4);
+            border-style: dashed;
+            border-color: var(--berry-pink);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-style: italic;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* BOTÓN FLOTANTE ESTILO LIFESTYLE */
+        .btn-berry {
+            background: var(--berry-dark);
+            color: white;
+            padding: 20px 55px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 20px 40px rgba(157, 23, 77, 0.15);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-berry:hover { background-color: var(--berry-pink); }
+        .btn-berry:active { transform: scale(0.96); }
+
+    </style>
+</head>
+<body>
+
+    <div class="prism-background">
+        <div class="prism-light"></div>
+    </div>
+
+    <div class="main-container">
+
+        <section>
+            <div class="popup-card visible">
+                <p class="brand-badge">Grower Lab presenta</p>
+                <h1 class="hero-title">BERRYFULL</h1>
+                <h2 class="hero-subtitle">Propuesta Estratégica de Marca</h2>
+            </div>
+        </section>
+
+        <section>
+            <div class="popup-card reveal-item">
+                <h2 class="section-title">Estrategia de Contenido</h2>
+
+                <div class="glass-box">
+                    <span class="tag">Formato Corto</span>
+                    <h3 class="card-title">Contenido de Alto Impacto</h3>
+                    <p class="card-desc">Videos dinámicos y nativos optimizados para la retención inmediata en TikTok e Instagram Reels, enfocados 100% en estética Wellness Café.</p>
+                </div>
+
+                <div class="glass-box">
+                    <span class="tag">Conexión</span>
+                    <h3 class="card-title">Narrativa Humana y POV</h3>
+                    <p class="card-desc">Vlogs inmersivos que permiten al usuario vivir la experiencia Berryfull desde su propia pantalla, humanizando los procesos con voces reales.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="popup-card reveal-item">
+                <h2 class="section-title">Comunidad e Identidad</h2>
+
+                <div class="glass-box">
+                    <span class="tag">Target Ideal</span>
+                    <h3 class="card-title">Gen Z y Millennials</h3>
+                    <p class="card-desc">Segmentación dirigida a apasionados del estilo de vida saludable y restaurantes instagrameables que ven la alimentación como parte de su Lifestyle diario.</p>
+                </div>
+
+                <div class="glass-box" style="background: rgba(255, 255, 255, 0.4); border-color: rgba(219, 39, 119, 0.4);">
+                    <span class="tag" style="background: var(--berry-pink);">El Producto Estrella</span>
+                    <h3 class="card-title">Asaí Bowls y Estética</h3>
+                    <p class="card-desc">Posicionar el menú como un accesorio de bienestar estético y fotografiable, estimulando la interacción del algoritmo actual a través del formato vertical.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="popup-card reveal-item">
+                <h2 class="section-title">Estrategia de Copys</h2>
+
+                <div class="glass-box">
+                    <span class="tag">Hooks Orgánicos</span>
+                    <h3 class="card-title">Frases Ganadoras para Captar Atención</h3>
+                    
+                    <div class="hook-box">
+                        "Guarda este video para tu próximo post-workout date."
+                    </div>
+                    <div class="hook-box">
+                        "Etiqueta a tu amix el obsesionado con el asaí."
+                    </div>
+                    <div class="hook-box" style="margin-bottom: 10px;">
+                        "Solo disponible esta semana. ¿Te vas a quedar con el antojo?"
+                    </div>
+                </div>
+
+                <a href="https://wa.me/528134480481?text=%C2%A1Hola!%20Me%20gust%C3%B3%20mucho%20la%20propuesta%20web%20para%20Berryfull." target="_blank" class="btn-berry">Iniciar Proyecto</a>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Animación Pop-Up al hacer Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
