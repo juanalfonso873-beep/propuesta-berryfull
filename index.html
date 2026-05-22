@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --berry-pink: #FF1493; /* Rosa vibrante como el logo */
+            --berry-pink: #FF1493;
             --berry-dark: #4C0519;
-            --berry-yellow: #FFFF00; /* El toque del logo fusion cuisine */
+            --berry-yellow: #FFFF00;
             --glass-sheet: rgba(255, 255, 255, 0.15);
             --glass-border: rgba(255, 182, 193, 0.6);
         }
@@ -30,7 +30,7 @@
             width: 100%;
         }
 
-        /* --- FONDO PRISMA LÍQUIDO COQUETTE --- */
+        /* --- FONDO PRISMA LÍQUIDO --- */
         .prism-background {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -57,12 +57,12 @@
             to { transform: translate(-35%, -35%) rotate(360deg); }
         }
 
-        /* --- SCRIBBLES Y GARABATOS DECORATIVOS --- */
+        /* --- SCRIBBLES Y GARABATOS --- */
         .scribble {
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.4;
+            opacity: 0.35;
             color: var(--berry-pink);
             font-size: 1.5rem;
             animation: floatScribble 6s infinite ease-in-out;
@@ -73,12 +73,12 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
 
-        /* --- LOGO BERRYFULL CUSTOM --- */
+        /* --- LOGO BERRYFULL --- */
         .berry-logo-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .logo-text {
@@ -132,7 +132,7 @@
             margin-bottom: 20px;
         }
 
-        /* --- SISTEMA POP-UP REVEAL --- */
+        /* --- SISTEMA REVEAL --- */
         .popup-card {
             opacity: 0;
             transform: scale(0.95) translateY(30px);
@@ -143,12 +143,9 @@
             align-items: center;
         }
 
-        .popup-card.visible {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
+        .popup-card.visible { opacity: 1; transform: scale(1) translateY(0); }
 
-        /* --- RECUADROS LIQUID GLASS --- */
+        /* --- CRISTAL LÍQUIDO --- */
         .glass-box {
             background: var(--glass-sheet);
             backdrop-filter: blur(50px) saturate(200%);
@@ -161,14 +158,6 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 25px 50px rgba(157, 23, 77, 0.05), inset 0 4px 10px #fff;
-        }
-
-        .glass-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 100%);
-            pointer-events: none;
         }
 
         .section-title {
@@ -192,18 +181,6 @@
             letter-spacing: 2px;
         }
 
-        .card-title {
-            font-size: clamp(1.3rem, 3vw, 1.8rem);
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-
-        .card-desc {
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            line-height: 1.5;
-            opacity: 0.85;
-        }
-
         .hook-box {
             background: rgba(255, 255, 255, 0.4);
             border: 1px dashed var(--berry-pink);
@@ -215,6 +192,26 @@
             width: 100%;
             color: var(--berry-pink);
         }
+
+        /* --- BOTONES --- */
+        .btn-inspiration {
+            background: rgba(255, 255, 255, 0.4);
+            color: var(--berry-pink);
+            border: 1.5px solid var(--berry-pink);
+            padding: 15px 40px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-top: 15px;
+            transition: 0.3s;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+        .btn-inspiration:hover { background: var(--berry-pink); color: white; }
 
         .btn-berry {
             background: var(--berry-dark);
@@ -231,7 +228,59 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             transition: 0.3s;
         }
-        .btn-berry:hover { background: var(--berry-pink); transform: translateY(-3px); }
+
+        /* --- MODAL GALERÍA --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 245, 247, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-content {
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 35px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .gallery-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: #f0f0f0;
+            border: none;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+        }
 
     </style>
 </head>
@@ -244,43 +293,37 @@
     <div class="scribble" style="top: 10%; left: 5%;"><i class="fa-solid fa-star"></i></div>
     <div class="scribble" style="top: 25%; right: 10%; animation-delay: 1s;"><i class="fa-solid fa-heart"></i></div>
     <div class="scribble" style="bottom: 15%; left: 8%; animation-delay: 2s;"><i class="fa-solid fa-lemon"></i></div>
-    <div class="scribble" style="top: 50%; left: 12%; animation-delay: 0.5s; opacity: 0.2;"><i class="fa-solid fa-sparkles"></i></div>
+    <div class="scribble" style="top: 50%; left: 12%; animation-delay: 0.5s;"><i class="fa-solid fa-sparkles"></i></div>
     <div class="scribble" style="top: 15%; right: 15%; animation-delay: 3s;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
     <div class="scribble" style="bottom: 30%; right: 5%; animation-delay: 1.5s;"><i class="fa-solid fa-cloud"></i></div>
-    <div class="scribble" style="top: 70%; left: 3%; animation-delay: 4s; font-size: 1rem;"><i class="fa-solid fa-seedling"></i></div>
     <div class="scribble" style="bottom: 5%; right: 12%; animation-delay: 2.5s;"><i class="fa-solid fa-ice-cream"></i></div>
-    <div class="scribble" style="top: 40%; left: 25%; animation-delay: 0.8s; opacity: 0.15;"><i class="fa-solid fa-leaf"></i></div>
-    <div class="scribble" style="top: 5%; right: 30%; animation-delay: 3.5s;"><i class="fa-solid fa-gem"></i></div>
 
     <div class="main-container">
 
         <section>
             <div class="popup-card visible">
                 <p class="grower-header">GROWER COMPANY PRESENTA</p>
-                
                 <div class="berry-logo-container">
                     <h1 class="logo-text">Berryfull</h1>
                     <div class="logo-subtext">FUSION CUISINE</div>
                 </div>
-
-                <h2 style="font-weight: 400; font-size: 1.2rem; opacity: 0.6; letter-spacing: 1px;">Propuesta Estratégica 2026 ✨</h2>
+                <h2 style="font-weight: 400; font-size: 1.1rem; opacity: 0.6; letter-spacing: 1px; margin-bottom: 25px;">Propuesta Estratégica 2026 ✨</h2>
+                <button id="open-inspiration" class="btn-inspiration">Inspiración ✨</button>
             </div>
         </section>
 
         <section>
             <div class="popup-card reveal-item">
                 <h2 class="section-title">Estrategia Viral 🚀</h2>
-
                 <div class="glass-box">
                     <span class="tag">📱 Contenido Vertical</span>
-                    <h3 class="card-title">Impacto Visual y Cercanía 🤩</h3>
-                    <p class="card-desc">Videos tipo VLOG y POV optimizados para Gen Z y Millennials. No solo vendemos comida, vendemos un Lifestyle Wellness que genera deseo orgánico 🍓.</p>
+                    <h3 style="font-weight: 800; margin-bottom: 12px;">Impacto Visual y Cercanía 🤩</h3>
+                    <p style="line-height: 1.5; opacity: 0.85;">Videos tipo VLOG y POV optimizados para Gen Z y Millennials. No solo vendemos comida, vendemos un Lifestyle Wellness que genera deseo orgánico 🍓.</p>
                 </div>
-
                 <div class="glass-box">
                     <span class="tag">🤝 Narrativa</span>
-                    <h3 class="card-title">Contacto Humano ❤️</h3>
-                    <p class="card-desc">Humanizar la marca a través de narraciones auténticas. El algoritmo actual premia la interacción genuina y la estética con la que la comunidad se identifica ✨.</p>
+                    <h3 style="font-weight: 800; margin-bottom: 12px;">Contacto Humano ❤️</h3>
+                    <p style="line-height: 1.5; opacity: 0.85;">Humanizar la marca a través de narraciones auténticas. El algoritmo actual premia la interacción genuina y la estética con la que la comunidad se identifica ✨.</p>
                 </div>
             </div>
         </section>
@@ -288,33 +331,50 @@
         <section>
             <div class="popup-card reveal-item">
                 <h2 class="section-title">Hooks que Conectan 💬</h2>
-
                 <div class="glass-box">
                     <span class="tag">📝 Social Media Copy</span>
-                    <h3 class="card-title">Llamados a la Acción 🔥</h3>
-                    
+                    <h3 style="font-weight: 800; margin-bottom: 12px;">Llamados a la Acción 🔥</h3>
                     <div class="hook-box">"Guarda este video para tu próximo post-workout date 🥑."</div>
                     <div class="hook-box">"Etiqueta a tu amix el obsesionado con el asaí 🥣."</div>
                     <div class="hook-box" style="margin-bottom: 10px;">"¿Te vas a quedar con el antojo? Solo disponible esta semana ⏳."</div>
                 </div>
-
                 <a href="https://wa.me/528134480481?text=%C2%A1Hola!%20Me%20encant%C3%B3%20la%20propuesta%20web%20s%C3%BAper%20aesthetic%20para%20Berryfull%20%F0%9F%A5%A3✨" target="_blank" class="btn-berry">Empezar a crear 🚀</a>
             </div>
         </section>
 
     </div>
 
+    <div id="inspiration-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-inspiration" class="close-modal">✕</button>
+            <h2 style="font-family: 'Pacifico'; color: var(--berry-pink); text-align: center; font-size: 2.5rem; margin-bottom: 10px;">Vibe & Aesthetic</h2>
+            <p style="text-align: center; opacity: 0.6; font-size: 0.9rem; margin-bottom: 20px;">Referencias visuales para el branding 2026</p>
+            <div class="gallery-grid">
+                <img src="ejm1.jpg" alt="Inspiración 1">
+                <img src="ejm2.jpg" alt="Inspiración 2">
+                <img src="ejm3.jpg" alt="Inspiración 3">
+                <img src="ejm4.jpg" alt="Inspiración 4">
+                <img src="ejm5.jpg" alt="Inspiración 5">
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Observador de Scroll para efecto Pop-Up
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); }
             });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+
+        // LOGICA MODAL
+        const modal = document.getElementById('inspiration-modal');
+        const openBtn = document.getElementById('open-inspiration');
+        const closeBtn = document.getElementById('close-inspiration');
+
+        openBtn.onclick = () => modal.classList.add('active');
+        closeBtn.onclick = () => modal.classList.remove('active');
+        window.onclick = (e) => { if(e.target == modal) modal.classList.remove('active'); }
     </script>
 </body>
 </html>
